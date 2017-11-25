@@ -1,5 +1,5 @@
 <html lang="en"> <head>
-        <link id="favico" rel="icon" href="favico/notFound.svg"> 
+        <link id="favico" rel="icon" href="favico/notFound.png"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather</title>
         <style>
@@ -449,7 +449,7 @@ const changeUnit = () => {
 }
 
 function renderState(weather) {
-    const temp = (weather.main.temp / 10);
+    const temp = weather.main.temp;
     const tempBox = document.getElementById("temp").childNodes;
 
     if (!testFortheUS && weather.sys.country === 'US') {
@@ -513,7 +513,7 @@ function renderState(weather) {
     icon.innerHTML = config[main].icon;
     document.body.style.backgroundImage = `url(wallpapers/${main}.webp)`;
 
-    document.getElementById("favico").href = `favico/${main}.svg`;
+    document.getElementById("favico").href = `favico/${main}.png`;
 
 }
 
@@ -523,10 +523,11 @@ function updateWeather() {
 
             let xhr = new XMLHttpRequest();
 
-            xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?lon=${parseFloat(pos.coords.longitude)}&lat=${parseFloat(pos.coords.latitude)}&appid=f5a359bc5e2bccab28ab109f6182ff73`, true);
+            xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?lon=${parseFloat(pos.coords.longitude)}&lat=${parseFloat(pos.coords.latitude)}&appid=f5a359bc5e2bccab28ab109f6182ff73&units=metric`, true);
             xhr.responseType = "json";
             xhr.send(null);
             xhr.onload = () => {
+               
                 renderState(xhr.response);
             }
 
