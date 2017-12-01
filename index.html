@@ -529,6 +529,7 @@ function updateWeather() {
             xhr.onload = () => {
                
                 renderState(xhr.response);
+              
             }
 
         });
@@ -543,6 +544,7 @@ function updateWeather() {
 }
 
 window.onload = updateWeather();
+window.setInterval(updateWeather,15*60E3);
 </script>
 
 
